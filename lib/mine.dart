@@ -32,14 +32,6 @@ class _MineState extends State<Mine> {
                   ),
                 ),
                 SizedBox(
-                  width: 120,
-                  height: 100,
-                  child: CustomPaint(
-                    painter: FolderPainter2(),
-                  ),
-                ),
-                SizedBox(
-                  width: 120,
                   height: 100,
                   child: CustomPaint(
                     painter: FolderPainter3(),
@@ -98,34 +90,6 @@ class FolderPainter extends CustomPainter {
   }
 }
 
-class FolderPainter2 extends CustomPainter {
-  @override
-  void paint(
-    Canvas canvas,
-    Size size,
-  ) {
-    Paint paint = Paint()
-      ..color = Colors.amber
-      ..style = PaintingStyle.stroke
-      ..style = PaintingStyle.fill
-      ..strokeWidth = 2;
-
-    Path path = Path()
-      ..moveTo(20, 0)
-      ..quadraticBezierTo(0, 0, 20, size.height)
-      ..lineTo(size.width, size.height - 20)
-      ..quadraticBezierTo(0, 0, 20, size.height)
-      ..lineTo(size.width, 0);
-
-    canvas.drawPath(path, paint);
-  }
-
-  @override
-  bool shouldRepaint(CustomPainter oldDelegate) {
-    return false;
-  }
-}
-
 class FolderPainter3 extends CustomPainter {
   @override
   void paint(
@@ -138,14 +102,16 @@ class FolderPainter3 extends CustomPainter {
       ..style = PaintingStyle.fill
       ..strokeWidth = 2;
 
-    Path path = Path()
-      ..moveTo(20, 0)
-      ..quadraticBezierTo(20, 20, 20, 20)
-      ..quadraticBezierTo(20, 20, 20, 20)
-      ..lineTo(size.height, size.width)
-      ..lineTo(0, size.width / 4);
+    final a = Offset(size.width * 1 / 6, size.height * 1 / 4);
+    final b = Offset(size.width * 5 / 6, size.height * 3 / 4);
+    const r = 50.0;
+    final rect = Rect.fromPoints(a, b);
+    final p1 = Offset(size.width * 1 / 6, size.height * 1 / 4);
+    final p2 = Offset(size.width * 6 / 6, size.height * 3 / 4);
 
-    canvas.drawPath(path, paint);
+    canvas.drawCircle(a, r, paint);
+    // canvas.drawLine(p1, p2, paint);
+    // canvas.drawRRect(RRect.fromRectAndRadius(rect, r), paint);
   }
 
   @override
